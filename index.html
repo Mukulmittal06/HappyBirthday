@@ -24,15 +24,18 @@ body{
 }
 @keyframes fadeIn{from{opacity:0;transform:scale(0.95);}to{opacity:1;transform:scale(1);}}
 .hidden{display:none;}
+
 .count{
   font-size:130px;
   color:#ff7ad9;
   text-shadow:0 0 40px #ff7ad9;
   animation:pulse 1s infinite;
 }
-@keyframes pulse{0%,100%{transform:scale(1);}50%{transform:scale(1.1);}}
+@keyframes pulse{0%,100{transform:scale(1);}50%{transform:scale(1.1);}}
+
 h1{font-size:34px;margin-bottom:12px;text-shadow:0 0 15px #ff6ec7;}
 p{font-size:18px;opacity:0.95;}
+
 button{
   margin-top:25px;
   padding:14px 34px;
@@ -46,6 +49,7 @@ button{
   transition:transform 0.3s;
 }
 button:hover{transform:scale(1.08);}
+
 .card{
   background:rgba(255,0,150,0.2);
   border-radius:25px;
@@ -55,7 +59,8 @@ button:hover{transform:scale(1.08);}
   box-shadow:0 0 40px rgba(255,0,150,0.5);
   animation:float 3s ease-in-out infinite;
 }
-@keyframes float{0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);}}
+@keyframes float{0%,100{transform:translateY(0);}50%{transform:translateY(-10px);}}
+
 .scroll{
   height:340px;
   overflow-y:auto;
@@ -63,6 +68,7 @@ button:hover{transform:scale(1.08);}
   background:rgba(255,255,255,0.12);
   border-radius:18px;
 }
+
 .gift{
   font-size:100px;
   animation:giftPulse 0.9s infinite alternate;
@@ -70,16 +76,33 @@ button:hover{transform:scale(1.08);}
 }
 @keyframes giftPulse{from{transform:scale(1) rotate(-3deg);}to{transform:scale(1.15) rotate(3deg);}}
 
-.star{position:fixed;width:2px;height:2px;background:white;opacity:0.8;animation:twinkle 3s infinite;}
-@keyframes twinkle{0%,100%{opacity:0.3;}50%{opacity:1;}}
+/* Stars */
+.star{
+  position:fixed;
+  width:2px;
+  height:2px;
+  background:white;
+  opacity:0.8;
+  animation:twinkle 3s infinite;
+}
+@keyframes twinkle{0%,100{opacity:0.3;}50%{opacity:1;}}
 
+/* Confetti */
 @keyframes fall{to{transform:translateY(110vh) rotate(720deg);}}
-.confetti-piece{position:fixed;top:-10px;width:10px;height:10px;animation:fall 4s linear infinite;}
+.confetti-piece{
+  position:fixed;
+  top:-10px;
+  width:10px;
+  height:10px;
+  animation:fall 4s linear infinite;
+}
 </style>
 </head>
+
 <body>
 
-<audio id="bgm" src="precious.mp3" loop></audio>
+<!-- 🎵 Background Music -->
+<audio id="bgm" src="song.mp3" loop preload="auto"></audio>
 
 <!-- COUNTDOWN -->
 <div class="section" id="count">
@@ -109,7 +132,7 @@ button:hover{transform:scale(1.08);}
 <div class="section hidden" id="page2">
   <h1>🌸 About You</h1>
   <div class="card">
-    <p>Your smile has the power to heal hearts.
+    <p>Your smile heals hearts.
     Your presence brings peace.
     Your laugh makes moments unforgettable ✨</p>
   </div>
@@ -120,22 +143,21 @@ button:hover{transform:scale(1.08);}
 <div class="section hidden" id="page3">
   <h1>🌈 This New Chapter</h1>
   <div class="card">
-    <p>21 is not just a number — it’s the beginning of
-    independence, dreams, courage, and beautiful adventures ahead 🌟</p>
+    <p>21 is the start of dreams, courage, growth,
+    and beautiful adventures waiting ahead 🌟</p>
   </div>
   <button onclick="goTo('page4')">Next →</button>
 </div>
 
 <!-- PAGE 4 -->
 <div class="section hidden" id="page4">
-  <h1>💌 A Message From The Heart</h1>
+  <h1>💌 From the Heart</h1>
   <div class="card scroll">
     <p>
-    Happy 21st Birthday, Tannu! 🎉💖<br><br>
-    You deserve a life filled with love, success, and happiness.
-    May you always find reasons to smile, strength to rise,
-    and people who value you for who you truly are.<br><br>
-    Never doubt yourself — you are capable of amazing things 🌸✨
+      Happy 21st Birthday, Tannu! 🎉💖<br><br>
+      May your life be filled with love, success, confidence,
+      and people who truly value you.<br><br>
+      Never forget how special you are 🌸✨
     </p>
   </div>
   <button onclick="goTo('page5')">Continue →</button>
@@ -143,8 +165,8 @@ button:hover{transform:scale(1.08);}
 
 <!-- PAGE 5 -->
 <div class="section hidden" id="page5">
-  <h1>✨ One Last Magical Surprise</h1>
-  <p>Something special is waiting for you…</p>
+  <h1>✨ One Last Surprise</h1>
+  <p>Something special is waiting…</p>
   <div class="gift" onclick="goTo('final')">🎁</div>
 </div>
 
@@ -153,52 +175,70 @@ button:hover{transform:scale(1.08);}
   <div class="card">
     <h1>🎉 Surprise! 🎉</h1>
     <p>
-    Lots and lots of love for you, Tannu ❤️<br><br>
-    May this year bring you confidence, happiness,
-    and memories that make your heart glow ✨<br><br>
-    Happy 21st Birthday once again! 🎂💖
+      Lots of love for you, Tannu ❤️<br><br>
+      May this year bring happiness,
+      confidence, and beautiful memories ✨<br><br>
+      Happy 21st Birthday 🎂💖
     </p>
     <button onclick="location.reload()">Replay the magic 🔁</button>
   </div>
 </div>
 
 <script>
-let c=3;
-const num=document.getElementById('num');
-const timer=setInterval(()=>{
-  c--; num.textContent=c;
-  if(c===0){clearInterval(timer); show('intro');}
-},1000);
+// 🎵 MUSIC FIX (IMPORTANT)
+const bgm = document.getElementById("bgm");
+let musicStarted = false;
+
+function startMusic() {
+  if (!musicStarted) {
+    bgm.volume = 0.8;
+    bgm.play().catch(()=>{});
+    musicStarted = true;
+  }
+}
+
+document.addEventListener("click", startMusic, { once: true });
+document.addEventListener("touchstart", startMusic, { once: true });
+
+// Countdown
+let c = 3;
+const num = document.getElementById("num");
+const timer = setInterval(() => {
+  c--;
+  num.textContent = c;
+  if (c === 0) {
+    clearInterval(timer);
+    show("intro");
+  }
+}, 1000);
 
 function show(id){
-  document.querySelectorAll('.section').forEach(s=>s.classList.add('hidden'));
-  document.getElementById(id).classList.remove('hidden');
+  document.querySelectorAll(".section").forEach(s=>s.classList.add("hidden"));
+  document.getElementById(id).classList.remove("hidden");
 }
 
 function goTo(id){
-  document.getElementById('bgm').play();
   show(id);
 }
 
-function confetti(){
-  for(let i=0;i<120;i++){
-    const d=document.createElement('div');
-    d.className='confetti-piece';
-    d.style.left=Math.random()*100+'vw';
-    d.style.background=`hsl(${Math.random()*360},100%,70%)`;
-    d.style.animationDuration=2+Math.random()*3+'s';
-    document.body.appendChild(d);
-    setTimeout(()=>d.remove(),5000);
-  }
+// Confetti
+for(let i=0;i<120;i++){
+  const d=document.createElement("div");
+  d.className="confetti-piece";
+  d.style.left=Math.random()*100+"vw";
+  d.style.background=`hsl(${Math.random()*360},100%,70%)`;
+  d.style.animationDuration=2+Math.random()*3+"s";
+  document.body.appendChild(d);
+  setTimeout(()=>d.remove(),5000);
 }
-confetti();
 
+// Stars
 for(let i=0;i<90;i++){
-  const s=document.createElement('div');
-  s.className='star';
-  s.style.left=Math.random()*100+'vw';
-  s.style.top=Math.random()*100+'vh';
-  s.style.animationDuration=2+Math.random()*3+'s';
+  const s=document.createElement("div");
+  s.className="star";
+  s.style.left=Math.random()*100+"vw";
+  s.style.top=Math.random()*100+"vh";
+  s.style.animationDuration=2+Math.random()*3+"s";
   document.body.appendChild(s);
 }
 </script>
